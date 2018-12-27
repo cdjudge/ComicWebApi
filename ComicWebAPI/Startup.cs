@@ -26,7 +26,14 @@ namespace ComicWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyCors",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,13 +51,10 @@ namespace ComicWebAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("MyCors");
+            app.UseStaticFiles();
             app.UseMvc();
-            app.UseCors(builder => builder
-                .WithOrigins("http://localhost:3000")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
-            app.UseCorsMiddleware();
+
         }
     }
 }

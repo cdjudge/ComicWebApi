@@ -20,7 +20,7 @@
     "ComicWebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/Default",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

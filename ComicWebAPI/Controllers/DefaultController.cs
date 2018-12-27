@@ -7,17 +7,18 @@ namespace ComicWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class DefaultController : ControllerBase
     {
         // GET: api/Default
         [HttpGet]
-        [EnableCors]
         public async Task<string> Get()
             
         {
             var hc = new HttpClient();
             hc.DefaultRequestHeaders.Add("user-agent", "Only a test!");
-            var url = "https://comicvine.gamespot.com/api/issues/?api_key=6501e49837b61d47f4bb33508909218856619457&format=json&filter=name:Walking Dead";
+            //var url = "http://comicvine.gamespot.com/api/issues/?api_key=6501e49837b61d47f4bb33508909218856619457&format=json&filter=name:Walking Dead";
+            var url = "http://localhost:5000/sample.html";
             return await hc.GetStringAsync(url);
         }
 
